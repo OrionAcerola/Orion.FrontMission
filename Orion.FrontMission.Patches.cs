@@ -228,7 +228,7 @@ namespace Orion.FrontMission.Patches
                 var state = player.MachineStatus.State;
                 var pilot = state.Pilot;
                 int used = state.PilotStatus.skills.Count;
-                if (used >= pilot.m_MaxSkills)
+                if (used >= PilotData.PILOT_SKILL_MAX)
                 {
                     __result = false;
                     return false;
