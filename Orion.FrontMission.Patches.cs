@@ -228,7 +228,12 @@ namespace Orion.FrontMission.Patches
                 var state = player.MachineStatus.State;
                 var pilot = state.Pilot;
                 int used = state.PilotStatus.skills.Count;
-                if (used >= PilotData.PILOT_SKILL_MAX)
+
+                bool usePilotLimit = !Configs.PilotMaxSkillSlots.Value;
+                int skillLimit = usePilotLimit
+                    ? (int)pilot.m_MaxSkills
+                    : PilotData.PILOT_SKILL_MAX;
+                if (used >= skillLimit)
                 {
                     __result = false;
                     return false;
@@ -396,7 +401,8 @@ namespace Orion.FrontMission.Patches
                             wanzer.m_Skills[i].LevelUp();
                         LocalizedAllSkillsField[i].SetLabel(wanzer.m_Skills[i].GetName());
                         var def = wanzer.m_Skills[i].Definition;
-                        ModLog.Info($"UIPilotStatusMenu: Pilot={wanzer.m_Pilot.GetName()} Skill={def.Skill} LevelUpRate={def.LevelUpRate} ActivationRate={def.ActivationRate} Level={def.Level}");
+                        if (Configs.DebugMode.Value)
+                            ModLog.Info($"UIPilotStatusMenu: Pilot={wanzer.m_Pilot.GetName()} Skill={def.Skill} LevelUpRate={def.LevelUpRate} ActivationRate={def.ActivationRate} Level={def.Level}");
                     }
                 }
                 EnabledSkillsContext.FastSkillLevelEnabled = false;

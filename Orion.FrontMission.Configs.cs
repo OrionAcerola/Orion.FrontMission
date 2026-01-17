@@ -16,6 +16,7 @@ namespace Orion.FrontMission.Config
         //internal static ConfigEntry<bool> SkillsAlwaysProc;
         internal static ConfigEntry<bool> Regenerate;
         internal static ConfigEntry<bool> LearnAllSkills;
+        internal static ConfigEntry<bool> PilotMaxSkillSlots;
 
 
         internal static void ReadConfig(ConfigFile Config)
@@ -27,11 +28,12 @@ namespace Orion.FrontMission.Config
             FreeCost = Config.Bind("Cheats", "FreeCost", false, "All shop wares cost 0 credits");
             InfiniteAmmo = Config.Bind("Cheats", "InfiniteAmmo", false, "Player weapons have infinite ammo");
             DebugMode = Config.Bind("Debug", "DebugMode", false, "Enable debug logging");
-            ForceSkills = Config.Bind("Cheats", "ForceSkills", false, "Select skill on levelup");
+            Regenerate = Config.Bind("Cheats", "Regenerate", false, "Player wanzers regenerate HP each turn. Peewie effect");
+            ForceSkills = Config.Bind("Cheats", "ForceSkills", false, "Select skill on levelup. Must be true for LearnAllSkills and PilotMaxSkillSlots");
             FastSkillLevel = Config.Bind("Cheats", "FastSkillLevel", true, "Instant max skill level on Pilot Screen");
             //SkillsAlwaysProc = Config.Bind("Cheats", "SkillsAlwaysProc", true, "Player skills always proc");
-            Regenerate = Config.Bind("Cheats", "Regenerate", false, "Player wanzers regenerate HP each turn.Peewie effect");
             LearnAllSkills = Config.Bind("Cheats", "LearnAllSkills", false, "Pilots can learn all skills");
+            PilotMaxSkillSlots = Config.Bind("Cheats", "PilotMaxSkillSlots", true, "Pilots have max skill slots");
         }
     }
 }

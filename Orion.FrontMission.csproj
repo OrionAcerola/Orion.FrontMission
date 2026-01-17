@@ -1,84 +1,85 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Nullable>disable</Nullable>
-	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyName>Orion.FrontMission</AssemblyName>
-    <RootNamespace>Orion.FrontMission</RootNamespace>
-    <OutputType>Library</OutputType>
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>disable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<AssemblyName>Orion.FrontMission</AssemblyName>
+		<RootNamespace>Orion.FrontMission</RootNamespace>
+		<OutputType>Library</OutputType>
 
-    <!-- Change THIS to your game install folder (the one that contains BepInEx/) -->
-    <GameDir>C:\Program Files (x86)\Steam\steamapps\common\FRONT MISSION 1st Remake</GameDir>
-	<BepInExDir>$(GameDir)\BepInEx</BepInExDir>
+		<!-- Change THIS to your game install folder (the one that contains BepInEx/) -->
+		<GameDir>C:\Program Files (x86)\Steam\steamapps\common\FRONT MISSION 1st Remake</GameDir>
+		<BepInExDir>$(GameDir)\BepInEx</BepInExDir>
 
-    <!-- Auto-copy built DLL into BepInEx plugins -->
-    <CopyToBepInExPlugins>true</CopyToBepInExPlugins>
-  </PropertyGroup>
+		<!-- Auto-copy built DLL into BepInEx plugins -->
+		<CopyToBepInExPlugins>true</CopyToBepInExPlugins>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <!-- BepInEx -->
-    <Reference Include="BepInEx">
-      <HintPath>$(GameDir)\BepInEx\core\BepInEx.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+	<ItemGroup>
+		<!-- BepInEx -->
+		<Reference Include="BepInEx">
+			<HintPath>$(GameDir)\BepInEx\core\BepInEx.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-    <!-- Harmony that ships with BepInEx 5 -->
-    <Reference Include="0Harmony">
-      <HintPath>$(GameDir)\BepInEx\core\0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+		<!-- Harmony -->
+		<Reference Include="0Harmony">
+			<HintPath>$(GameDir)\BepInEx\core\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-    <!-- Unity assemblies (Unity 2021 usually needs these two at minimum) -->
-    <Reference Include="UnityEngine">
-      <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+		<!-- Unity assemblies -->
+		<Reference Include="UnityEngine">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-	<Reference Include="UnityEngine.InputLegacyModule">
-	  <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
-	  <Private>false</Private>
-	</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-    <!-- Often needed when touching ScriptableObjects / UI / coroutines, safe to include -->
-    <Reference Include="UnityEngine.UI">
-      <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.UI.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+		<!-- ScriptableObjects / UI / Coroutines -->
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.UI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-	<Reference Include="Unity.TextMeshPro">
-	  <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\Unity.TextMeshPro.dll</HintPath>
-      <Private>false</Private>
-	</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 
-    <!-- Game assemblies -->
-    <Reference Include="Assembly-CSharp">
-      <HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
+		<Reference Include="DOTween.dll">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\DOTween.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<!-- Game assemblies -->
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(GameDir)\FRONT MISSION 1st Remake_Data\Managed\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
 
 	<Target Name="CopyToBepInEx" AfterTargets="Build">
-	<PropertyGroup>
-		<PluginDir>$(BepInExDir)\plugins\$(AssemblyName)</PluginDir>
-	</PropertyGroup>
-	
-	<MakeDir Directories="$(PluginDir)" />
-	
-	<Copy
-		SourceFiles="$(OutputPath)$(AssemblyName).dll"
-		DestinationFolder="$(PluginDir)" />
+		<PropertyGroup>
+			<PluginDir>$(BepInExDir)\plugins\$(AssemblyName)</PluginDir>
+		</PropertyGroup>
+		<MakeDir Directories="$(PluginDir)" />
+		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(PluginDir)" />
 	</Target>
 
 </Project>
