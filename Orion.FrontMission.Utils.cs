@@ -45,5 +45,16 @@ namespace Orion.FrontMission.Utils
             [System.ThreadStatic] public static bool AttackerIsPlayer;
             [System.ThreadStatic] public static Machine Defender;
         }
+
+        internal static readonly SkillType[] AllRoots =
+            [
+                SkillType.PI_SKL_FSTUN1,
+                SkillType.PI_SKL_FCYCL1,
+                SkillType.PI_SKL_SDUEL1,
+                SkillType.PI_SKL_SCYCL1,
+                SkillType.PI_SKL_SSPED1,
+                SkillType.PI_SKL_DDUEL1,
+                SkillType.PI_SKL_FFRST1,
+            ];
     }
 }

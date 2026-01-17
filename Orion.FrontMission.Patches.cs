@@ -234,20 +234,39 @@ namespace Orion.FrontMission.Patches
                     return false;
                 }
                 var list = new List<SkillType>();
-                for (int i = 0; i < pilot.m_LearnableSkills.Length; i++)
+                if (!Configs.LearnAllSkills.Value)
                 {
-                    var st = pilot.m_LearnableSkills[i];
-                    if (st == SkillType.PI_SKL_NONE) continue;
-                    var def = Skill_Def.GetSkill(st);
-                    bool already = false;
-                    for (int s = 0; s < state.PilotStatus.skills.Count; s++)
-                        if (state.PilotStatus.skills[s].Definition.ActualType == def.ActualType)
-                        {
-                            already = true;
-                            break;
-                        }
-                    if (already) continue;
-                    list.Add(st);
+                    for (int i = 0; i < pilot.m_LearnableSkills.Length; i++)
+                    {
+                        var st = pilot.m_LearnableSkills[i];
+                        if (st == SkillType.PI_SKL_NONE) continue;
+                        var def = Skill_Def.GetSkill(st);
+                        bool already = false;
+                        for (int s = 0; s < state.PilotStatus.skills.Count; s++)
+                            if (state.PilotStatus.skills[s].Definition.ActualType == def.ActualType)
+                            {
+                                already = true;
+                                break;
+                            }
+                        if (already) continue;
+                        list.Add(st);
+                    }
+                }
+                else
+                {
+                    foreach (var root in AllRoots)
+                    {
+                        var def = Skill_Def.GetSkill(root);
+                        bool already = false;
+                        for (int s = 0; s < state.PilotStatus.skills.Count; s++)
+                            if (state.PilotStatus.skills[s].Definition.ActualType == def.ActualType)
+                            {
+                                already = true;
+                                break;
+                            }
+                        if (already) continue;
+                        list.Add(root);
+                    }
                 }
                 if (list.Count > 0)
                 {
@@ -373,7 +392,8 @@ namespace Orion.FrontMission.Patches
                 {
                     if (wanzer.m_Skills.Count > i && wanzer.m_Skills[i] != null && wanzer.m_Skills[i].Definition.NextLevel != SkillType.PI_SKL_NONE)
                     {
-                        wanzer.m_Skills[i].LevelUp();
+                        while (wanzer.m_Skills[i].Definition.NextLevel != SkillType.PI_SKL_NONE)
+                            wanzer.m_Skills[i].LevelUp();
                         LocalizedAllSkillsField[i].SetLabel(wanzer.m_Skills[i].GetName());
                         var def = wanzer.m_Skills[i].Definition;
                         ModLog.Info($"UIPilotStatusMenu: Pilot={wanzer.m_Pilot.GetName()} Skill={def.Skill} LevelUpRate={def.LevelUpRate} ActivationRate={def.ActivationRate} Level={def.Level}");
